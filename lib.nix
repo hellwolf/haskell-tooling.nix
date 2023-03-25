@@ -5,8 +5,8 @@ rec {
     ghcVer = builtins.replaceStrings ["-" "."] ["" ""] pkgs.haskell.compiler.${a'}.haskellCompilerName;
     vtag     = builtins.replaceStrings ["ghc"] [""] ghcVer;
   in {
-    vtag     = vtag;
-    useHLS   = useHLS;
+    inherit vtag;
+    inherit useHLS;
     compiler = pkgs.haskell.compiler.${ghcVer};
     packages = pkgs.haskell.packages.${ghcVer};
   };
