@@ -11,7 +11,7 @@
         pkgs = import nixpkgs { inherit system; };
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs = lib.install pkgs ["ghc96" "ghc94+hls"];
+          buildInputs = lib.install pkgs ["ghc96" "ghc94+hls" "ghc92+hls"];
         };
       })) // {
         inherit lib;

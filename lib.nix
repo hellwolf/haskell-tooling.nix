@@ -17,14 +17,12 @@ rec {
           packages = haskell.packages.${ghcVer};
         }) ghcAliases;
         ghcsWithHLS = builtins.filter (a: a.useHLS) ghcs;
-    in [
-      (buildEnv {
-        name = "ghc-compilers";
-        ignoreCollisions = true;
-        paths = map (a: a.compiler) ghcs;
-      })
-    ] ++ (if builtins.length ghcsWithHLS > 0 then [(haskell-language-server.override {
-        supportedGhcVersions = map (a: a.vtag) ghcsWithHLS;
-    })] else [])
+    in [(buildEnv {
+      name = "ghc-compilers";
+      ignoreCollisions = true;
+      paths = map (a: a.compiler) ghcs;
+    })] ++ (map (a:
+      a.packages.haskell-language-server
+    ) ghcsWithHLS)
   );
 }
