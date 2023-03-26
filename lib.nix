@@ -2,13 +2,15 @@ rec {
   parseSpec = pkgs: a: let
     a' = builtins.replaceStrings ["+hls"] [""] a;
     useHLS = a' != a;
+    ghcExist = builtins.hasAttr a' pkgs.haskell.compiler;
+  in { inherit ghcExist; } // (if ghcExist then let
     ghcVer = builtins.replaceStrings ["-" "."] ["" ""] pkgs.haskell.compiler.${a'}.haskellCompilerName;
-    vtag     = builtins.replaceStrings ["ghc"] [""] ghcVer;
+    vtag   = builtins.replaceStrings ["ghc"] [""] ghcVer;
   in {
-    inherit vtag useHLS;
+    inherit useHLS vtag;
     compiler = pkgs.haskell.compiler.${ghcVer};
     packages = pkgs.haskell.packages.${ghcVer};
-  };
+  } else {});
 
   install = pkgs: specs : with pkgs; [
     stack
@@ -16,7 +18,7 @@ rec {
     hlint
     stylish-haskell
   ] ++ (
-    let ghcs = map (parseSpec pkgs) specs;
+    let ghcs = builtins.filter (a: a.ghcExist) (map (parseSpec pkgs) specs);
         ghcsWithHLS = builtins.filter (a: a.useHLS) ghcs;
     in [
       (buildEnv {
