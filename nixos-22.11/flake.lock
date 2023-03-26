@@ -18,12 +18,12 @@
     "haskell-tooling": {
       "locked": {
         "lastModified": 0,
-        "narHash": "sha256-RwWAADZyE2+1l80SP7+muWu1q7dkndm5McuLp2Vp+O8=",
-        "path": "/nix/store/nrl1a0i75sbpx14gpzcbih0m0r1xb71g-source",
+        "narHash": "sha256-E93f+CEEMnLbtiRdRhGI5otBhPRIcGYSf428mkh/sgg=",
+        "path": "/nix/store/hksh9rdg72a3p7p0m6jxyjm0qrn5alay-source",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/nrl1a0i75sbpx14gpzcbih0m0r1xb71g-source",
+        "path": "/nix/store/hksh9rdg72a3p7p0m6jxyjm0qrn5alay-source",
         "type": "path"
       }
     },
