@@ -9,10 +9,7 @@ Yet Another Nix Flake For Installing Haskell Tooling
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    haskell-tooling = {
-      url = "github:hellwolf/haskell-tooling.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    haskell-tooling.url = "github:hellwolf/haskell-tooling.nix";
   };
 
   outputs = { nixpkgs, flake-utils, haskell-tooling, ... }:
