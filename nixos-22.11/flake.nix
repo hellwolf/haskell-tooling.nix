@@ -10,7 +10,11 @@
       pkgs = import nixpkgs { inherit system; };
     in {
       devShells.default = pkgs.mkShell {
-        buildInputs = haskell-tooling.lib.install pkgs ["ghc96" "ghc94+hls"];
+        # Note that ghc96 is not available for 22.11, but it is not a problem
+        buildInputs = haskell-tooling.lib.install pkgs ["ghc96" "ghc94+hls"]
+          ++ [
+            pkgs.haskell.packages.ghc94.Agda
+          ];
       };
     }));
 }
